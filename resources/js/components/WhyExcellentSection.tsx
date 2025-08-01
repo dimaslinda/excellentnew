@@ -15,7 +15,7 @@ interface WhyExcellentSectionProps {
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => {
     return (
-        <div className="rounded-tl-[65px] border border-gray-100 bg-[#fcfcfc] p-6 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+        <div className="h-full rounded-tl-[65px] border border-gray-100 bg-[#fcfcfc] p-6 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
             <div className="mb-4">{icon}</div>
             <h3 className="mb-3 text-lg font-semibold text-gray-900">{title}</h3>
             <p className="text-sm leading-relaxed text-gray-600">{description}</p>
@@ -72,10 +72,10 @@ const WhyExcellentSection: React.FC<WhyExcellentSectionProps> = ({
 
                     {/* Title Section */}
                     <div className="flex flex-col justify-center text-end lg:w-1/4 lg:min-w-[250px] xl:w-1/3">
-                        <h2 className="text-4xl leading-tight font-bold text-gray-900 lg:text-5xl xl:text-7xl">
+                        <h2 className="text-4xl leading-tight font-bold text-cardhitam lg:text-5xl xl:text-7xl">
                             {title}
                             <br />
-                            <span className="mt-2 inline-block rounded-lg bg-orange-400 px-3 py-1 text-white">{highlightText}</span>
+                            <span className="mt-2 inline-block rounded-lg bg-headerbanner px-3 py-1 text-white">{highlightText}</span>
                             {titleEnd}
                         </h2>
                     </div>

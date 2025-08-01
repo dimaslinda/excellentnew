@@ -19,8 +19,8 @@ export default function VisionSection({
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Text Content */}
                     <div className="order-2 lg:order-1">
-                        <h2 className="mb-6 text-3xl font-bold text-gray-900 lg:mb-8 lg:text-4xl xl:text-5xl">{title}</h2>
-                        <p className="text-justify text-base leading-relaxed text-gray-700 lg:text-lg">{description}</p>
+                        <h2 className="mb-6 text-3xl font-bold text-cardhitam lg:mb-8 lg:text-4xl xl:text-5xl">{title}</h2>
+                        <p className="text-justify text-base leading-relaxed text-cardhitam lg:text-lg">{description}</p>
                     </div>
 
                     {/* Image Content */}

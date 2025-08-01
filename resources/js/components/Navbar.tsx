@@ -134,12 +134,13 @@ export default function Navbar({ className = '' }: NavbarProps) {
                             </Link>
                         </li>
                         <li>
-                            <Link
+                            <a
                                 href="/artikel"
+                                target="_blank"
                                 className="block rounded-sm px-3 py-2 text-white capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:text-cardhitam lg:hover:bg-transparent lg:hover:text-[#FFB43F]"
                             >
                                 Artikel
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                 </div>
