@@ -1,9 +1,11 @@
 import ArticleSection from '@/components/ArticleSection';
 import ClientSection from '@/components/ClientSection';
+import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
 import PortfolioSection from '@/components/PortfolioSection';
 import ProductSection from '@/components/ProductSection';
+import TestimoniSection from '@/components/TestimoniSection';
 import VisionSection from '@/components/VisionSection';
 import WhyExcellentSection from '@/components/WhyExcellentSection';
 import { Head } from '@inertiajs/react';
@@ -63,11 +65,15 @@ export default function Index({ responselates = [], responselimit = [] }: IndexP
                 <ClientSection />
             </section>
             <section className="bg-white font-poppins">
-                <ArticleSection 
-                    latestArticles={responselates}
-                    limitedArticles={responselimit}
-                />
+                <ArticleSection latestArticles={responselates} limitedArticles={responselimit} />
             </section>
+            <section className="relative bg-white py-16 font-poppins">
+                <TestimoniSection />
+                <div className="absolute bottom-0 left-0 hidden md:block">
+                    <img src="/img/general/clips.png" className="w-120" alt="clips" />
+                </div>
+            </section>
+            <Footer />
         </>
     );
 }

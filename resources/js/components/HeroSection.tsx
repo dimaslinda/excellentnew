@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import Button from '@/components/Button';
 
 interface HeroSectionProps {
     className?: string;
@@ -32,18 +32,12 @@ export default function HeroSection({ className = '' }: HeroSectionProps) {
                     </p>
 
                     <div className="flex w-full flex-col gap-4 sm:flex-row 2xl:max-w-3/4">
-                        <Link
-                            href="/konsultasi"
-                            className="inline-flex w-full items-center justify-center bg-[#FFB43F] px-8 py-3 text-base font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#FFB43F]/90 hover:shadow-lg focus:ring-4 focus:ring-[#FFB43F]/80 focus:outline-none"
-                        >
+                        <Button href="https://wa.me/6285213298462" className="w-full">
                             Konsultasi Sekarang
-                        </Link>
-                        <Link
-                            href="/download"
-                            className="inline-flex w-full items-center justify-center bg-[#FFB43F] px-8 py-3 text-base font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#FFB43F]/90 hover:shadow-lg focus:ring-4 focus:ring-[#FFB43F]/80 focus:outline-none"
-                        >
+                        </Button>
+                        <Button href="https://wa.me/6285213298462" className="w-full">
                             Download Profil
-                        </Link>
+                        </Button>
                     </div>
                 </div>
             </div>

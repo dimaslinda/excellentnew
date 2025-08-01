@@ -18,7 +18,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
                 <div className="flex space-x-3 lg:order-2 lg:space-x-0">
                     <a
-                        href="https://wa.me/6282125999029"
+                        href="https://wa.me/6285213298462"
                         target="_blank"
                         className="cursor-pointer rounded-full bg-tombol px-9 py-2 text-center font-poppins text-sm font-medium text-white capitalize hover:bg-tombol focus:ring-4 focus:ring-navbar focus:outline-none"
                     >
