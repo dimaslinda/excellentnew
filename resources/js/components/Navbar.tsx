@@ -75,10 +75,10 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                     <ul className="py-2 text-sm font-bold" aria-labelledby="dropdownLargeButton">
                                         <li>
                                             <Link
-                                                href="/inhouse"
+                                                href="/nlp"
                                                 className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
                                             >
-                                                In House Training
+                                                NLP
                                             </Link>
                                         </li>
                                         <li>

@@ -1,26 +1,42 @@
 interface VisionSectionProps {
+    title: string;
+    description: string | string[];
+    imageSrc: string;
+    imageAlt: string;
+    backgroundImage?: string;
     className?: string;
-    title?: string;
-    description?: string;
-    imageSrc?: string;
-    imageAlt?: string;
+    titleColor?: string;
+    descriptionColor?: string;
 }
 
 export default function VisionSection({
+    title,
+    description,
+    imageSrc,
+    imageAlt,
+    backgroundImage = '/img/general/bg-visi.webp',
     className = '',
-    title = 'Visi Besar Kami',
-    description = 'Menjadi partner strategis pengembangan SDM terbaik di Indonesia untuk korporasi besar yang ingin mentransformasi pola pikir, pola komunikasi, dan performa tim melalui pendekatan saintifik berbasis potensi dan teknologi.',
-    imageSrc = '/img/general/visi.webp',
-    imageAlt = 'Vision Image',
+    titleColor = 'text-cardhitam',
+    descriptionColor = 'text-cardhitam',
 }: VisionSectionProps) {
     return (
-        <section className={`bg-[url('/img/general/bg-visi.webp')] bg-cover bg-center bg-no-repeat py-16 lg:py-24 ${className}`}>
+        <section className={`bg-cover bg-center bg-no-repeat py-16 lg:py-24 ${className}`} style={{ backgroundImage: `url('${backgroundImage}')` }}>
             <div className="mx-auto max-w-screen-xl px-4">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                     {/* Text Content */}
                     <div className="order-2 lg:order-1">
-                        <h2 className="mb-6 text-3xl font-bold text-cardhitam lg:mb-8 lg:text-4xl xl:text-5xl">{title}</h2>
-                        <p className="text-justify text-base leading-relaxed text-cardhitam lg:text-lg">{description}</p>
+                        <h2 className={`mb-6 text-3xl font-bold lg:mb-8 lg:text-4xl xl:text-5xl ${titleColor}`}>{title}</h2>
+                        <div className={`text-justify text-base leading-relaxed lg:text-lg ${descriptionColor}`}>
+                            {Array.isArray(description) ? (
+                                description.map((paragraph, index) => (
+                                    <p key={index} className={index > 0 ? 'mt-4' : ''}>
+                                        {paragraph}
+                                    </p>
+                                ))
+                            ) : (
+                                <p>{description}</p>
+                            )}
+                        </div>
                     </div>
 
                     {/* Image Content */}

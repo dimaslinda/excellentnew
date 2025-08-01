@@ -50,7 +50,12 @@ export default function Index({ responselates = [], responselimit = [] }: IndexP
                 <HeroSection />
             </header>
             <section className="bg-white font-poppins">
-                <VisionSection />
+                <VisionSection 
+                    title="Visi Besar Kami"
+                    description="Menjadi partner strategis pengembangan SDM terbaik di Indonesia untuk korporasi besar yang ingin mentransformasi pola pikir, pola komunikasi, dan performa tim melalui pendekatan saintifik berbasis potensi dan teknologi."
+                    imageSrc="/img/general/visi.webp"
+                    imageAlt="Vision Image"
+                />
             </section>
             <section className="bg-white font-poppins">
                 <WhyExcellentSection />
