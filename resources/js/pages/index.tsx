@@ -1,5 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
+import PortfolioSection from '@/components/PortfolioSection';
 import ProductSection from '@/components/ProductSection';
 import VisionSection from '@/components/VisionSection';
 import WhyExcellentSection from '@/components/WhyExcellentSection';
@@ -31,6 +32,9 @@ export default function Index() {
             </section>
             <section className="bg-white font-poppins">
                 <ProductSection />
+            </section>
+            <section className="bg-white font-poppins">
+                <PortfolioSection />
             </section>
         </>
     );

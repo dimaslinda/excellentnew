@@ -59,8 +59,8 @@ const ProductSection: React.FC<ProductSectionProps> = ({
             <div className="mx-auto max-w-7xl">
                 {/* Header */}
                 <div className="mb-12 text-center">
-                    <h2 className="mb-4 text-3xl font-bold text-cardhitam lg:text-4xl">{title}</h2>
-                    <p className="text-lg text-cardhitam">{subtitle}</p>
+                    <h2 className="mb-4 text-3xl font-bold text-cardhitam lg:text-4xl xl:text-5xl">{title}</h2>
+                    <p className="text-lg text-cardhitam lg:text-xl">{subtitle}</p>
                 </div>
 
                 {/* Product Cards with Orange Background */}
