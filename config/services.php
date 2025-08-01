@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'wordpress' => [
+        'api_url' => env('WP_API_URL', 'https://excellentteam.id/wp-json/wp/v2'),
+        'username' => env('WP_API_USERNAME'),
+        'password' => env('WP_API_PASSWORD'),
+    ],
+
 ];

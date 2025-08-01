@@ -53,9 +53,9 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
         <section className="relative overflow-hidden bg-white px-4 py-16 font-poppins">
             <div className="relative mx-auto max-w-7xl">
                 {/* Header */}
-                <div className="mb-12 text-center">
-                    <h2 className="mb-6 text-4xl font-bold text-[#242424] md:text-5xl">{title}</h2>
-                    <p className="mx-auto max-w-3xl text-lg leading-relaxed text-[#4B4B4B]">{description}</p>
+                <div className="mx-auto mb-12 max-w-3xl text-center lg:text-start">
+                    <h2 className="mb-6 text-4xl font-bold text-cardhitam md:text-5xl">{title}</h2>
+                    <p className="text-lg leading-relaxed text-cardhitam">{description}</p>
                 </div>
 
                 {/* Portfolio Slider */}
@@ -97,35 +97,41 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
                         ))}
                     </div>
 
-                    {/* Navigation Arrows */}
+                </div>
+
+                {/* Navigation Controls - Arrows and Indicators in one row */}
+                <div className="mt-8 flex items-center justify-center space-x-8">
+                    {/* Previous Arrow */}
                     <button
                         onClick={prevSlide}
                         aria-label="Previous slide"
-                        className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white shadow-lg transition-colors duration-200 hover:bg-headerbanner/95"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white shadow-lg transition-colors duration-200 hover:bg-headerbanner/95"
                     >
                         <ChevronLeft size={24} />
                     </button>
+
+                    {/* Slide Indicators */}
+                    <div className="flex space-x-3">
+                        {portfolioItems.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                aria-label={`Go to slide ${index + 1}`}
+                                className={`h-3 w-3 rounded-full transition-colors duration-200 ${
+                                    index === currentSlide ? 'bg-headerbanner' : 'bg-[#D9D9D9]'
+                                }`}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Next Arrow */}
                     <button
                         onClick={nextSlide}
                         aria-label="Next slide"
-                        className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 transform cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white shadow-lg transition-colors duration-200 hover:bg-headerbanner/95"
+                        className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white shadow-lg transition-colors duration-200 hover:bg-headerbanner/95"
                     >
                         <ChevronRight size={24} />
                     </button>
-                </div>
-
-                {/* Slide Indicators */}
-                <div className="mt-8 flex justify-center space-x-3">
-                    {portfolioItems.map((_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => goToSlide(index)}
-                            aria-label={`Go to slide ${index + 1}`}
-                            className={`h-3 w-3 rounded-full transition-colors duration-200 ${
-                                index === currentSlide ? 'bg-headerbanner' : 'bg-[#D9D9D9]'
-                            }`}
-                        />
-                    ))}
                 </div>
             </div>
         </section>

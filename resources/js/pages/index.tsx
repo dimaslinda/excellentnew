@@ -1,3 +1,5 @@
+import ArticleSection from '@/components/ArticleSection';
+import ClientSection from '@/components/ClientSection';
 import HeroSection from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
 import PortfolioSection from '@/components/PortfolioSection';
@@ -6,7 +8,28 @@ import VisionSection from '@/components/VisionSection';
 import WhyExcellentSection from '@/components/WhyExcellentSection';
 import { Head } from '@inertiajs/react';
 
-export default function Index() {
+interface WordPressArticle {
+    id: number;
+    date: string;
+    link: string;
+    title: {
+        rendered: string;
+    };
+    excerpt: {
+        rendered: string;
+    };
+    featured_media_src_url: string;
+    yoast_head_json: {
+        description: string;
+    };
+}
+
+interface IndexProps {
+    responselates?: WordPressArticle[];
+    responselimit?: WordPressArticle[];
+}
+
+export default function Index({ responselates = [], responselimit = [] }: IndexProps) {
     return (
         <>
             <Head title="Beranda">
@@ -35,6 +58,15 @@ export default function Index() {
             </section>
             <section className="bg-white font-poppins">
                 <PortfolioSection />
+            </section>
+            <section className="bg-white font-poppins">
+                <ClientSection />
+            </section>
+            <section className="bg-white font-poppins">
+                <ArticleSection 
+                    latestArticles={responselates}
+                    limitedArticles={responselimit}
+                />
             </section>
         </>
     );
