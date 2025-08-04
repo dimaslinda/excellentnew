@@ -2,16 +2,20 @@ import Button from '@/components/Button';
 
 interface HeroSectionLayananProps {
     className?: string;
+    backgroundImage?: string;
 }
 
-export default function HeroSectionLayanan({ className = '' }: HeroSectionLayananProps) {
+export default function HeroSectionLayanan({ className = '', backgroundImage = '../../public/img/general/bg-beranda.webp' }: HeroSectionLayananProps) {
     return (
         <section className={`relative z-10 min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat font-poppins ${className}`}>
             {/* Background overlay */}
             <div className="absolute inset-0 bg-black/60"></div>
 
             {/* Background image */}
-            <div className="absolute inset-0 bg-[url('../../public/img/general/bg-beranda.webp')] bg-cover bg-center bg-no-repeat"></div>
+            <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: `url('${backgroundImage}')` }}
+            ></div>
 
             <div className="relative z-10 mx-auto max-w-screen-xl px-4 py-32 text-center lg:py-48">
                 <div className="mx-auto lg:max-w-1/2 2xl:max-w-3/4">

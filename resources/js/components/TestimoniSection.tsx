@@ -132,7 +132,7 @@ export default function TestimoniSection() {
                                     >
                                         {/* Profile Image */}
                                         <div className="mb-4 flex justify-center">
-                                            <div className="h-20 w-20 overflow-hidden rounded-full border-4 border-headerbanner">
+                                            <div className="h-20 w-20 overflow-hidden rounded-full">
                                                 <img
                                                     src={item.image}
                                                     alt={item.name}
