@@ -10,6 +10,10 @@ Route::get('/nlp', function () {
     return Inertia::render('NLP');
 })->name('nlp');
 
+Route::get('/neuro', function () {
+    return Inertia::render('Neuro');
+})->name('neuro');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

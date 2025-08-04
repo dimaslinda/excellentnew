@@ -7,6 +7,8 @@ interface FasilitasItem {
 }
 
 interface FasilitasPesertaProps {
+    title?: string;
+    subtitle?: string;
     fasilitas?: FasilitasItem[];
 }
 
@@ -53,14 +55,14 @@ const defaultFasilitas: FasilitasItem[] = [
     },
 ];
 
-const FasilitasPeserta: React.FC<FasilitasPesertaProps> = ({ fasilitas = defaultFasilitas }) => {
+const FasilitasPeserta: React.FC<FasilitasPesertaProps> = ({ title = 'Fasilitas', subtitle = 'Peserta', fasilitas = defaultFasilitas }) => {
     return (
         <section className="bg-white px-4 py-16 font-poppins">
             <div className="mx-auto max-w-6xl">
                 {/* Title */}
                 <div className="mb-12 text-center">
-                    <h2 className="text-4xl font-bold text-gray-800 lg:text-6xl">
-                        <span className="bg-headerbanner text-cardhitam">Fasilitas</span> <span className="text-gray-800">Peserta</span>
+                    <h2 className="text-4xl font-bold text-cardhitam lg:text-6xl">
+                        <span className="bg-headerbanner text-cardhitam">{title}</span> <span className="text-gray-800">{subtitle}</span>
                     </h2>
                 </div>
 

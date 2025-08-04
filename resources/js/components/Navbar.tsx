@@ -78,15 +78,15 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                                 href="/nlp"
                                                 className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
                                             >
-                                                NLP
+                                                NLP For Leaders
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
-                                                href="/modul"
+                                                href="/neuro"
                                                 className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
                                             >
-                                                Modul Ajar
+                                                Neuro-Semantics For Teams
                                             </Link>
                                         </li>
                                         <li>
