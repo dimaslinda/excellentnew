@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TestimoniController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// API Routes (public access)
+Route::get('/api/testimoni', [TestimoniController::class, 'apiIndex'])->name('api.testimoni');
 
 Route::get('/nlp', function () {
     return Inertia::render('NLP');
@@ -26,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    Route::resource('testimoni', TestimoniController::class);
 });
 
 require __DIR__ . '/settings.php';

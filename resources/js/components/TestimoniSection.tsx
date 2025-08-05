@@ -6,62 +6,34 @@ interface TestimoniItem {
     position: string;
     description: string;
     image: string;
+    created_at: string;
 }
-
-const testimoniData: TestimoniItem[] = [
-    {
-        id: 1,
-        name: 'Ibu Yuniar',
-        position: 'Korwil Perluk Kota Tangerang',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-    {
-        id: 2,
-        name: 'Bapak Ahmad',
-        position: 'Kepala Dinas Pendidikan',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-    {
-        id: 3,
-        name: 'Ibu Sari',
-        position: 'Manager IT Bank ABC',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-    {
-        id: 4,
-        name: 'Bapak Rudi',
-        position: 'Direktur PT. Maju Jaya',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-    {
-        id: 5,
-        name: 'Ibu Maya',
-        position: 'Kepala Bagian Keuangan',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-    {
-        id: 6,
-        name: 'Bapak Andi',
-        position: 'CEO Startup Tech',
-        description:
-            'Sebagai seorang Pengawas SD, saya sangat senang melihat dampak positif dari pelatihan IHT Assemen Diagnostik terutama  AI dan penilaian diagnosis pada guru guru kami. Pelatihan ini tidak hanya memberikan mereka pengetahuan tentang teknologi terbaru, tetapi juga membuka pikiran mereka terhadap berbagai aplikasi yang dapat bermanfaat dalam pekerjaan sehari hari terutama mempermudah dalam pembuatan soal dan mencari materi ajar.',
-        image: '/img/general/testimoni.png',
-    },
-];
 
 export default function TestimoniSection() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [itemsPerSlide, setItemsPerSlide] = useState(3);
+    const [testimoniData, setTestimoniData] = useState<TestimoniItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    // Fetch testimoni data from API
+    const fetchTestimoniData = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch('/api/testimoni');
+            if (!response.ok) {
+                throw new Error('Failed to fetch testimoni data');
+            }
+            const data = await response.json();
+            setTestimoniData(data);
+            setError(null);
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'An error occurred');
+            console.error('Error fetching testimoni data:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const updateItemsPerSlide = () => {
@@ -77,6 +49,11 @@ export default function TestimoniSection() {
         updateItemsPerSlide();
         window.addEventListener('resize', updateItemsPerSlide);
         return () => window.removeEventListener('resize', updateItemsPerSlide);
+    }, []);
+
+    // Fetch testimoni data on component mount
+    useEffect(() => {
+        fetchTestimoniData();
     }, []);
 
     const totalSlides = Math.ceil(testimoniData.length / itemsPerSlide);
@@ -99,28 +76,57 @@ export default function TestimoniSection() {
                 </h3>
             </div>
 
-            {/* Navigation Arrows */}
-            <div className="mb-8 flex justify-end space-x-2">
-                <button
-                    onClick={prevSlide}
-                    className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white transition-colors hover:bg-headerbanner/95"
-                >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button
-                    onClick={nextSlide}
-                    className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white transition-colors hover:bg-headerbanner/95"
-                >
-                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
+            {/* Loading State */}
+            {loading && (
+                <div className="flex justify-center items-center py-12">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-headerbanner"></div>
+                    <span className="ml-3 text-gray-600">Memuat testimoni...</span>
+                </div>
+            )}
 
-            {/* Testimonial Cards */}
-            <div className="overflow-hidden">
+            {/* Error State */}
+            {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+                    <div className="flex items-center">
+                        <svg className="h-5 w-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p className="text-red-700">Gagal memuat testimoni: {error}</p>
+                    </div>
+                    <button 
+                        onClick={fetchTestimoniData}
+                        className="mt-3 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                    >
+                        Coba Lagi
+                    </button>
+                </div>
+            )}
+
+            {/* Navigation Arrows and Testimonial Cards */}
+            {!loading && !error && testimoniData.length > 0 && (
+                <>
+                    {/* Navigation Arrows */}
+                    <div className="mb-8 flex justify-end space-x-2">
+                        <button
+                            onClick={prevSlide}
+                            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white transition-colors hover:bg-headerbanner/95"
+                        >
+                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={nextSlide}
+                            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-headerbanner text-white transition-colors hover:bg-headerbanner/95"
+                        >
+                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    {/* Testimonial Cards */}
+                    <div className="overflow-hidden">
                 <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                     {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                         <div key={slideIndex} className="w-full flex-shrink-0">
@@ -162,17 +168,32 @@ export default function TestimoniSection() {
                 </div>
             </div>
 
-            {/* Progress Indicators */}
-            <div className="mt-8 flex justify-center space-x-2">
-                {Array.from({ length: totalSlides }).map((_, index) => (
-                    <button
-                        aria-label={`Goto slide ${index + 1}`}
-                        key={index}
-                        onClick={() => setCurrentSlide(index)}
-                        className={`h-1 w-8 rounded transition-colors ${index === currentSlide ? 'bg-headerbanner' : 'bg-gray-300'}`}
-                    ></button>
-                ))}
-            </div>
+                    {/* Progress Indicators */}
+                    <div className="mt-8 flex justify-center space-x-2">
+                        {Array.from({ length: totalSlides }).map((_, index) => (
+                            <button
+                                aria-label={`Goto slide ${index + 1}`}
+                                key={index}
+                                onClick={() => setCurrentSlide(index)}
+                                className={`h-1 w-8 rounded transition-colors ${index === currentSlide ? 'bg-headerbanner' : 'bg-gray-300'}`}
+                            ></button>
+                        ))}
+                    </div>
+                </>
+            )}
+
+            {/* Empty State */}
+            {!loading && !error && testimoniData.length === 0 && (
+                <div className="text-center py-12">
+                    <div className="mx-auto mb-4 h-24 w-24 text-gray-300">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                        </svg>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-600 mb-2">Belum Ada Testimoni</h3>
+                    <p className="text-gray-500">Testimoni akan ditampilkan di sini setelah tersedia.</p>
+                </div>
+            )}
         </div>
     );
 }
