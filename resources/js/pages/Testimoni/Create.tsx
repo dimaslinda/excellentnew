@@ -11,6 +11,22 @@ import { ArrowLeft, Camera, Sparkles, Upload, User } from 'lucide-react';
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 
+interface FlashMessages {
+    success?: string;
+    error?: string;
+}
+
+interface PageProps {
+    flash?: FlashMessages;
+}
+
+interface TestimoniErrors {
+    nama?: string;
+    lokasi?: string;
+    isi_testimoni?: string;
+    foto?: string;
+}
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Testimoni',
@@ -23,8 +39,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function TestimoniCreate() {
-    const { props } = usePage();
-    const flash = (props as any).flash;
+    const { props } = usePage<PageProps>();
+    const flash = props.flash;
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -46,7 +62,7 @@ export default function TestimoniCreate() {
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            (setData as any)('foto', file);
+            setData('foto', file);
             const reader = new FileReader();
             reader.onload = (e) => {
                 setPreviewImage(e.target?.result as string);
@@ -132,8 +148,8 @@ export default function TestimoniCreate() {
                                         <Label className="text-sm font-medium text-foreground">Upload Foto Profil</Label>
                                         <p className="mt-1 text-xs text-muted-foreground">JPG, PNG, GIF hingga 2MB</p>
                                     </div>
-                                    {(errors as any).foto && (
-                                        <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as any).foto}</p>
+                                    {(errors as TestimoniErrors).foto && (
+                                        <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as TestimoniErrors).foto}</p>
                                     )}
                                 </div>
 
@@ -152,11 +168,11 @@ export default function TestimoniCreate() {
                                             placeholder="Masukkan nama lengkap Anda"
                                             className={cn(
                                                 'h-12 text-base transition-all duration-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
-                                                (errors as any).nama && 'border-destructive focus:ring-destructive',
+                                                (errors as TestimoniErrors).nama && 'border-destructive focus:ring-destructive',
                                             )}
                                         />
-                                        {(errors as any).nama && (
-                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as any).nama}</p>
+                                        {(errors as TestimoniErrors).nama && (
+                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as TestimoniErrors).nama}</p>
                                         )}
                                     </div>
 
@@ -173,11 +189,11 @@ export default function TestimoniCreate() {
                                             placeholder="Contoh: Jakarta, DKI Jakarta"
                                             className={cn(
                                                 'h-12 text-base transition-all duration-200 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400',
-                                                (errors as any).lokasi && 'border-destructive focus:ring-destructive',
+                                                (errors as TestimoniErrors).lokasi && 'border-destructive focus:ring-destructive',
                                             )}
                                         />
-                                        {(errors as any).lokasi && (
-                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as any).lokasi}</p>
+                                        {(errors as TestimoniErrors).lokasi && (
+                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as TestimoniErrors).lokasi}</p>
                                         )}
                                     </div>
 
@@ -194,15 +210,15 @@ export default function TestimoniCreate() {
                                             rows={6}
                                             className={cn(
                                                 'flex min-h-[150px] w-full resize-none rounded-lg border border-input bg-background px-4 py-3 text-base ring-offset-background transition-all duration-200 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-                                                (errors as any).isi_testimoni && 'border-destructive focus-visible:ring-destructive',
+                                                (errors as TestimoniErrors).isi_testimoni && 'border-destructive focus-visible:ring-destructive',
                                             )}
                                         />
                                         <div className="flex items-center justify-between">
                                             <p className="text-xs text-muted-foreground">Minimal 10 karakter</p>
                                             <p className="text-xs text-muted-foreground">{data.isi_testimoni.length} karakter</p>
                                         </div>
-                                        {(errors as any).isi_testimoni && (
-                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as any).isi_testimoni}</p>
+                                        {(errors as TestimoniErrors).isi_testimoni && (
+                                            <p className="rounded bg-destructive/10 px-3 py-1 text-sm text-destructive">{(errors as TestimoniErrors).isi_testimoni}</p>
                                         )}
                                     </div>
                                 </div>

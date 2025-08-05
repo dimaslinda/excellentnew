@@ -23,11 +23,27 @@ interface Props {
     testimoni: Testimoni;
 }
 
+interface FlashMessages {
+    success?: string;
+    error?: string;
+}
+
+interface PageProps {
+    flash?: FlashMessages;
+}
+
+interface TestimoniErrors {
+    nama?: string;
+    lokasi?: string;
+    isi_testimoni?: string;
+    foto?: string;
+}
+
 
 
 export default function TestimoniEdit({ testimoni }: Props) {
-    const { props } = usePage();
-    const flash = (props as any).flash;
+    const { props } = usePage<PageProps>();
+    const flash = props.flash;
     const [previewImage, setPreviewImage] = useState<string | null>(testimoni.foto);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -51,7 +67,7 @@ export default function TestimoniEdit({ testimoni }: Props) {
         },
     ];
     
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
         nama: testimoni.nama,
         lokasi: testimoni.lokasi,
         isi_testimoni: testimoni.isi_testimoni,
@@ -61,7 +77,7 @@ export default function TestimoniEdit({ testimoni }: Props) {
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            (setData as any)('foto', file);
+            setData('foto', file);
             const reader = new FileReader();
             reader.onload = (e) => {
                 setPreviewImage(e.target?.result as string);
@@ -153,7 +169,7 @@ export default function TestimoniEdit({ testimoni }: Props) {
                                         <Label className="text-sm font-medium text-foreground">Ganti Foto Profil</Label>
                                         <p className="text-xs text-muted-foreground mt-1">JPG, PNG, GIF hingga 2MB (opsional)</p>
                                     </div>
-                                    {(errors as any).foto && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as any).foto}</p>}
+                                    {(errors as TestimoniErrors).foto && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as TestimoniErrors).foto}</p>}
                                 </div>
 
                                 {/* Form Fields */}
@@ -171,10 +187,10 @@ export default function TestimoniEdit({ testimoni }: Props) {
                                             placeholder="Masukkan nama lengkap Anda"
                                             className={cn(
                                                 "h-12 text-base transition-all duration-200 focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400",
-                                                (errors as any).nama && "border-destructive focus:ring-destructive"
+                                                (errors as TestimoniErrors).nama && "border-destructive focus:ring-destructive"
                                             )}
                                         />
-                                        {(errors as any).nama && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as any).nama}</p>}
+                                        {(errors as TestimoniErrors).nama && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as TestimoniErrors).nama}</p>}
                                     </div>
 
                                     {/* Lokasi */}
@@ -190,10 +206,10 @@ export default function TestimoniEdit({ testimoni }: Props) {
                                             placeholder="Contoh: Jakarta, DKI Jakarta"
                                             className={cn(
                                                 "h-12 text-base transition-all duration-200 focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400",
-                                                (errors as any).lokasi && "border-destructive focus:ring-destructive"
+                                                (errors as TestimoniErrors).lokasi && "border-destructive focus:ring-destructive"
                                             )}
                                         />
-                                        {(errors as any).lokasi && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as any).lokasi}</p>}
+                                        {(errors as TestimoniErrors).lokasi && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as TestimoniErrors).lokasi}</p>}
                                     </div>
 
                                     {/* Isi Testimoni */}
@@ -209,14 +225,14 @@ export default function TestimoniEdit({ testimoni }: Props) {
                                             rows={6}
                                             className={cn(
                                                 "flex min-h-[150px] w-full rounded-lg border border-input bg-background px-4 py-3 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 resize-none transition-all duration-200",
-                                                (errors as any).isi_testimoni && "border-destructive focus-visible:ring-destructive"
+                                                (errors as TestimoniErrors).isi_testimoni && "border-destructive focus-visible:ring-destructive"
                                             )}
                                         />
                                         <div className="flex justify-between items-center">
                                             <p className="text-xs text-muted-foreground">Minimal 10 karakter</p>
                                             <p className="text-xs text-muted-foreground">{data.isi_testimoni.length} karakter</p>
                                         </div>
-                                        {(errors as any).isi_testimoni && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as any).isi_testimoni}</p>}
+                                        {(errors as TestimoniErrors).isi_testimoni && <p className="text-sm text-destructive bg-destructive/10 px-3 py-1 rounded">{(errors as TestimoniErrors).isi_testimoni}</p>}
                                     </div>
                                 </div>
 

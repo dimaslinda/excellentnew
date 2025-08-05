@@ -34,9 +34,18 @@ interface Props {
     };
 }
 
+interface FlashMessages {
+    success?: string;
+    error?: string;
+}
+
+interface PageProps {
+    flash?: FlashMessages;
+}
+
 export default function TestimoniIndex({ testimonis }: Props) {
-    const { props } = usePage();
-    const flash = (props as any).flash;
+    const { props } = usePage<PageProps>();
+    const flash = props.flash;
     const [selectedTestimoni, setSelectedTestimoni] = useState<Testimoni | null>(null);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [testimoniToDelete, setTestimoniToDelete] = useState<Testimoni | null>(null);
