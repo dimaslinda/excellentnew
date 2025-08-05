@@ -43,7 +43,27 @@ class TestimoniController extends Controller
      */
     public function index()
     {
-        $testimonis = Testimoni::latest()->get();
+        $testimonis = Testimoni::latest()->get()->map(function ($testimoni) {
+            // Check if foto is a URL (starts with http) or a local file path
+            $imageUrl = $testimoni->foto;
+            if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+                // It's a local file path, use Storage::url()
+                $imageUrl = Storage::url($imageUrl);
+            } elseif (!$imageUrl) {
+                // No image, use default
+                $imageUrl = '/img/general/testimoni.png';
+            }
+            // If it starts with 'http', use it as is (external URL)
+            
+            return [
+                'id' => $testimoni->id,
+                'nama' => $testimoni->nama,
+                'lokasi' => $testimoni->lokasi,
+                'isi_testimoni' => $testimoni->isi_testimoni,
+                'foto' => $imageUrl,
+                'created_at' => $testimoni->created_at,
+            ];
+        });
 
         return Inertia::render('Testimoni/Index', [
             'testimonis' => $testimonis
@@ -89,8 +109,25 @@ class TestimoniController extends Controller
     {
         $testimoni = Testimoni::findOrFail($id);
         
+        // Process image URL
+        $imageUrl = $testimoni->foto;
+        if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+            $imageUrl = Storage::url($imageUrl);
+        } elseif (!$imageUrl) {
+            $imageUrl = '/img/general/testimoni.png';
+        }
+        
+        $testimoniData = [
+            'id' => $testimoni->id,
+            'nama' => $testimoni->nama,
+            'lokasi' => $testimoni->lokasi,
+            'isi_testimoni' => $testimoni->isi_testimoni,
+            'foto' => $imageUrl,
+            'created_at' => $testimoni->created_at,
+        ];
+        
         return Inertia::render('Testimoni/Show', [
-            'testimoni' => $testimoni
+            'testimoni' => $testimoniData
         ]);
     }
 
@@ -100,9 +137,26 @@ class TestimoniController extends Controller
     public function edit(string $id)
     {
         $testimoni = Testimoni::findOrFail($id);
+        
+        // Process image URL
+        $imageUrl = $testimoni->foto;
+        if ($imageUrl && !str_starts_with($imageUrl, 'http')) {
+            $imageUrl = Storage::url($imageUrl);
+        } elseif (!$imageUrl) {
+            $imageUrl = '/img/general/testimoni.png';
+        }
+        
+        $testimoniData = [
+            'id' => $testimoni->id,
+            'nama' => $testimoni->nama,
+            'lokasi' => $testimoni->lokasi,
+            'isi_testimoni' => $testimoni->isi_testimoni,
+            'foto' => $imageUrl,
+            'created_at' => $testimoni->created_at,
+        ];
 
         return Inertia::render('Testimoni/Edit', [
-            'testimoni' => $testimoni
+            'testimoni' => $testimoniData
         ]);
     }
 
