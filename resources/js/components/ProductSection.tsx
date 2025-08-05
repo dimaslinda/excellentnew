@@ -39,7 +39,7 @@ const ProductSection: React.FC<ProductSectionProps> = ({
             imageAlt: 'In House Training session',
         },
         {
-            image: '/img/general/produk1.webp',
+            image: '/img/general/produk3.webp',
             title: 'Talent Mapping & SWPM Consulting',
             description:
                 '• Pemetaan potensi karyawan untuk the right man in the right job.\n• Rekomendasi penataan ulang tim, promosi, hingga strategi rekrutmen.',
