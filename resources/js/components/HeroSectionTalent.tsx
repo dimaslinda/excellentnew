@@ -1,26 +1,26 @@
 import Button from '@/components/Button';
 
-interface HeroSectionLayananProps {
+interface HeroSectionTalentProps {
     className?: string;
     backgroundImage?: string;
-    subtitle?: string;
     title?: string;
+    subtitle?: string;
     highlightedText?: string;
     description?: string;
     buttonText?: string;
     buttonHref?: string;
 }
 
-export default function HeroSectionLayanan({
+export default function HeroSectionTalent({
     className = '',
-    backgroundImage = '../../public/img/general/bg-beranda.webp',
-    subtitle = 'in house training',
-    title = 'for leaders',
-    highlightedText = 'NLP',
-    description = 'Leading Through Influence, Thinking, and Transformation',
+    backgroundImage = '/img/general/bg-talent.webp',
+    title = 'talent mapping',
+    highlightedText = 'stifin',
+    subtitle = 'consulting',
+    description = '“The Right Person in the Right Role with the Right Potential.”',
     buttonText = 'Konsultasi Sekarang',
     buttonHref = 'https://wa.me/6285213298462',
-}: HeroSectionLayananProps) {
+}: HeroSectionTalentProps) {
     return (
         <section className={`relative z-10 h-auto bg-gray-900 bg-cover bg-center bg-no-repeat font-poppins ${className}`}>
             {/* Background overlay */}
@@ -29,16 +29,16 @@ export default function HeroSectionLayanan({
             {/* Background image */}
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${backgroundImage}')` }}></div>
 
-            <div className="relative z-10 mx-auto max-w-screen-xl px-4 py-32 text-center lg:py-48">
-                <div className="mx-auto lg:max-w-1/2 2xl:max-w-3/4">
-                    <span className="relative mb-5 text-2xl font-light tracking-[0.5em] text-white uppercase lg:text-3xl">{subtitle}</span>
-                    <h1 className="leading-tight font-bold text-white">
-                        <span className="block text-5xl uppercase lg:text-6xl xl:text-8xl 2xl:text-9xl">
-                            <span className="text-[#FFB43F]">{highlightedText}</span> {title}
+            <div className="relative z-10 mx-auto max-w-screen-xl px-4 py-32 text-center lg:py-52">
+                <div className="mx-auto max-w-full">
+                    <h1 className="mb-5 leading-tight font-bold text-white">
+                        <span className="block text-4xl uppercase lg:text-6xl xl:text-8xl">
+                            {title} <br /> &<span className="text-[#FFB43F]"> {highlightedText} </span>
+                            {subtitle}
                         </span>
                     </h1>
 
-                    <p className="mb-5 text-lg font-semibold text-white md:mb-10 lg:text-xl 2xl:text-2xl">{description}</p>
+                    <p className="mb-5 text-lg font-light text-white italic md:mb-10 lg:text-xl 2xl:text-2xl">{description}</p>
 
                     <div className="item-center flex w-full flex-col justify-center gap-4 sm:flex-row">
                         <Button href={buttonHref} className="w-full md:w-1/2 2xl:w-1/3">

@@ -24,7 +24,7 @@ export default function HeroSectionNeuro({
     buttonHref = 'https://wa.me/6285213298462',
 }: HeroSectionNeuroProps) {
     return (
-        <section className={`relative z-10 min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat font-poppins ${className}`}>
+        <section className={`relative z-10 h-auto bg-gray-900 bg-cover bg-center bg-no-repeat font-poppins ${className}`}>
             {/* Background overlay */}
             <div className="absolute inset-0 bg-black/60"></div>
 

@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface NavbarProps {
@@ -8,6 +8,14 @@ interface NavbarProps {
 export default function Navbar({ className = '' }: NavbarProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const { url } = usePage();
+
+    const isActive = (path: string) => {
+        if (path === '/') {
+            return url === '/';
+        }
+        return url.startsWith(path);
+    };
 
     return (
         <nav className={`fixed top-0 z-20 w-full bg-transparent ${className}`}>
@@ -47,8 +55,12 @@ export default function Navbar({ className = '' }: NavbarProps) {
                         <li>
                             <Link
                                 href="/"
-                                className="block rounded-sm bg-tombol px-3 py-2 text-white capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:text-[#FFB43F] lg:hover:bg-transparent lg:hover:text-[#FFB43F]"
-                                aria-current="page"
+                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:hover:bg-transparent ${
+                                    isActive('/')
+                                        ? 'bg-headerbanner text-white lg:bg-transparent lg:text-headerbanner lg:hover:text-headerbanner'
+                                        : 'text-white lg:bg-transparent lg:text-cardhitam lg:hover:text-[#FFB43F]'
+                                }`}
+                                aria-current={isActive('/') ? 'page' : undefined}
                             >
                                 Beranda
                             </Link>
@@ -76,7 +88,9 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                         <li>
                                             <Link
                                                 href="/nlp"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/nlp') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
                                                 NLP For Leaders
                                             </Link>
@@ -84,23 +98,29 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                         <li>
                                             <Link
                                                 href="/neuro"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/neuro') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
                                                 Neuro-Semantics For Teams
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
-                                                href="/webinar"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                href="/talentmapping"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/talentmapping') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
-                                                Webinar
+                                                Talent Mapping
                                             </Link>
                                         </li>
                                         <li>
                                             <Link
                                                 href="/ecourse"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/ecourse') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
                                                 E-Course
                                             </Link>
@@ -108,7 +128,9 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                         <li>
                                             <Link
                                                 href="/bootcamp"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/bootcamp') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
                                                 Bootcamp
                                             </Link>
@@ -116,7 +138,9 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                         <li>
                                             <Link
                                                 href="/eskul"
-                                                className="block rounded-sm px-3 py-2 text-cardhitam capitalize hover:bg-tombol hover:text-white"
+                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
+                                                    isActive('/eskul') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                }`}
                                             >
                                                 Ekskul
                                             </Link>
@@ -128,7 +152,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
                         <li>
                             <Link
                                 href="/galeri"
-                                className="block rounded-sm px-3 py-2 text-white capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:text-cardhitam lg:hover:bg-transparent lg:hover:text-[#FFB43F]"
+                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:hover:bg-transparent ${
+                                    isActive('/galeri')
+                                        ? 'bg-headerbanner text-white lg:bg-transparent lg:text-headerbanner lg:hover:text-headerbanner'
+                                        : 'text-white lg:bg-transparent lg:text-cardhitam lg:hover:text-[#FFB43F]'
+                                }`}
                             >
                                 Gallery
                             </Link>
@@ -137,7 +165,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
                             <a
                                 href="/artikel"
                                 target="_blank"
-                                className="block rounded-sm px-3 py-2 text-white capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:text-cardhitam lg:hover:bg-transparent lg:hover:text-[#FFB43F]"
+                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:hover:bg-transparent ${
+                                    isActive('/artikel')
+                                        ? 'bg-headerbanner text-white lg:bg-transparent lg:text-headerbanner lg:hover:text-headerbanner'
+                                        : 'text-white lg:bg-transparent lg:text-cardhitam lg:hover:text-[#FFB43F]'
+                                }`}
                             >
                                 Artikel
                             </a>

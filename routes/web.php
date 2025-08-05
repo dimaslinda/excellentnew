@@ -14,6 +14,10 @@ Route::get('/neuro', function () {
     return Inertia::render('Neuro');
 })->name('neuro');
 
+Route::get('/talentmapping', function () {
+    return Inertia::render('TalentMapping');
+})->name('talentmapping');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
