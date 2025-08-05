@@ -1,7 +1,7 @@
 import BenefitSection from '@/components/BenefitSection';
 import FasilitasPeserta from '@/components/FasilitasPeserta';
 import Footer from '@/components/Footer';
-import HeroSectionTalent from '@/components/HeroSectionTalent';
+import HeroSectionLearning from '@/components/HeroSectionLearning';
 import MateriPembelajaran from '@/components/MateriPembelajaran';
 import Navbar from '@/components/Navbar';
 import ProgramGoalsSection from '@/components/ProgramGoalsSection';
@@ -9,10 +9,51 @@ import TestimoniSection from '@/components/TestimoniSection';
 import VisionSection from '@/components/VisionSection';
 import { Head } from '@inertiajs/react';
 
-export default function TalentMapping() {
+export default function ELearning() {
     return (
         <>
-            <Head title="Talent Mapping - Pemetaan Talenta">
+            <Head title="E-Learning - Platform Pembelajaran Digital | Excellent Consulting">
+                {/* Meta Description */}
+                <meta
+                    name="description"
+                    content="Platform E-Learning digital Excellent Consulting menyediakan pembelajaran berbasis sains untuk pengembangan SDM. Akses materi talent mapping, STIFiN assessment, dan program pelatihan korporat online."
+                />
+
+                {/* Keywords */}
+                <meta
+                    name="keywords"
+                    content="e-learning platform, pembelajaran digital, online training, talent mapping online, STIFiN assessment, pelatihan korporat online, LMS Indonesia, digital learning, excellent consulting elearning, kursus online SDM"
+                />
+
+                {/* Open Graph Tags */}
+                <meta property="og:title" content="E-Learning Platform - Pembelajaran Digital Berbasis Sains | Excellent Consulting" />
+                <meta
+                    property="og:description"
+                    content="Platform pembelajaran digital untuk pengembangan SDM dengan materi talent mapping, assessment, dan pelatihan korporat. Akses kapan saja, dimana saja."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://excellentteam.id/elearning" />
+                <meta property="og:image" content="https://excellentteam.id/img/general/program-talent.webp" />
+                <meta property="og:image:alt" content="E-Learning Platform Excellent Consulting" />
+                <meta property="og:site_name" content="Excellent Consulting" />
+                <meta property="og:locale" content="id_ID" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="E-Learning Platform - Pembelajaran Digital Berbasis Sains" />
+                <meta
+                    name="twitter:description"
+                    content="Platform pembelajaran digital untuk pengembangan SDM dengan materi talent mapping, assessment, dan pelatihan korporat."
+                />
+                <meta name="twitter:image" content="https://excellentteam.id/img/general/program-talent.webp" />
+
+                {/* Additional SEO Meta Tags */}
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Excellent Consulting" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="canonical" href="https://excellentteam.id/elearning" />
+
+                {/* Fonts */}
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,16 +66,16 @@ export default function TalentMapping() {
 
             <header className="relative font-poppins">
                 <Navbar />
-                <HeroSectionTalent />
+                <HeroSectionLearning />
             </header>
 
             <main className="font-poppins">
                 <section className="bg-white font-poppins">
                     <VisionSection
                         title="Deskripsi Program"
-                        description="Talent Mapping & STIFiN Consulting adalah program asesmen dan konsultasi strategis berbasis sains yang dirancang untuk membantu perusahaan dalam menempatkan SDM sesuai potensi dominan, mengoptimalkan struktur tim, serta menyusun strategi rekrutmen dan promosi berbasis data."
-                        imageSrc="/img/general/program-talent.webp"
-                        imageAlt="Talent Mapping Vision"
+                        description="e-Learning & Digital Academy for Corporate adalah layanan pembelajaran digital untuk perusahaan yang ingin meningkatkan kompetensi SDM secara berkelanjutan dan efisien. Kami menyediakan platform LMS yang dapat dikustomisasi untuk pelatihan internal, onboarding, hingga program skill seperti UI/UX, Digital Marketing, dan Design Thinking."
+                        imageSrc="/img/general/visi.webp"
+                        imageAlt="E-Learning Vision"
                     />
                 </section>
 
@@ -42,7 +83,7 @@ export default function TalentMapping() {
                     title="Tujuan"
                     subtitle="Program"
                     imageSrc="/img/general/tujuan-talent.webp"
-                    imageAlt="program talent mapping"
+                    imageAlt="program e-learning"
                     decorativeImageSrc="/img/general/clips2.png"
                     decorativeImageAlt="clips2"
                     cards={[
@@ -68,7 +109,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Mengidentifikasi potensi alamiah karyawan secara objektif dan terukur',
+                            description: 'Menyediakan akses belajar mandiri dan fleksibel kepada seluruh karyawan.',
                         },
                         {
                             id: 2,
@@ -81,7 +122,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Menyusun ulang tim kerja berbasis fungsi dominan otak dan bakat',
+                            description: 'Meningkatkan kompetensi digital dan soft skills yang relevan dengan industri saat ini.',
                         },
                         {
                             id: 3,
@@ -93,7 +134,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Menyediakan data decision support untuk rekrutmen, promosi, dan coaching',
+                            description: 'Memudahkan HR memantau progres, hasil, dan pelaksanaan program pelatihan.',
                         },
                         {
                             id: 4,
@@ -105,7 +146,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Meningkatkan retensi karyawan dengan penempatan kerja yang sesuai potensi',
+                            description: 'Memberikan sertifikasi internal sebagai bentuk validasi kompetensi.',
                         },
                     ]}
                 />
@@ -114,43 +155,33 @@ export default function TalentMapping() {
                     items={[
                         {
                             id: '1',
-                            title: 'Asesmen Biometrik STIFIN',
-                            description: 'Mengungkap dominasi fungsi otak dan kecerdasan utama (Sensing, Thinking, Intuiting, Feeling, Instinct)',
+                            title: 'UI/UX Fundamentals',
+                            description: 'Memahami desain antarmuka & pengalaman pengguna untuk solusi digital yang ramah pengguna',
                         },
                         {
                             id: '2',
-                            title: 'Sales & Marketing Talent Focus',
-                            description: 'Mengidentifikasi individu dengan potensi persuasi, branding, dan pelayanan',
+                            title: 'Corporate Onboarding (opsional)',
+                            description: 'Menstandarisasi pemahaman karyawan baru terhadap budaya kerja dan sistem perusahaan',
                         },
                         {
                             id: '3',
-                            title: 'Asesmen Talents Mapping (Kuisioner)',
-                            description: 'Memetakan 10 Talents & 30 Sub-Talents untuk keperluan spesifik SDM',
+                            title: 'Digital Marketing Essentials',
+                            description: 'Mempelajari strategi pemasaran online dan analitik digital untuk pertumbuhan bisnis',
                         },
                         {
                             id: '4',
-                            title: 'Team Collaboration Matrix',
-                            description: 'Merancang tim berdasarkan pola dominasi yang saling melengkapi',
+                            title: 'Custom Internal Courses',
+                            description: 'Pelatihan konten internal perusahaan dengan fitur tracking dan evaluasi',
                         },
                         {
                             id: '5',
-                            title: 'Self Awareness & Self Management',
-                            description: 'Membantu karyawan memahami kekuatan, kelemahan, dan potensi diri',
+                            title: 'Design Thinking for Innovation',
+                            description: 'Mendorong inovasi melalui empati, eksplorasi masalah, dan uji solusi',
                         },
                         {
                             id: '6',
-                            title: 'Strategy Consultation (Manajerial)',
-                            description: 'Sesi analisa data hasil asesmen untuk rekomendasi rekrutmen, promosi, dan perbaikan struktur organisasi',
-                        },
-                        {
-                            id: '7',
-                            title: 'Mapping Leadership Potential',
-                            description: 'Menyusun profil calon pemimpin berdasarkan kapasitas berpikir dan gaya komunikasi',
-                        },
-                        {
-                            id: '8',
-                            title: 'Career Path Development',
-                            description: 'Menyusun jalur karier yang selaras dengan potensi individu dan kebutuhan organisasi',
+                            title: 'AI for Business Productivity',
+                            description: 'Mengoptimalkan AI untuk efisiensi kerja, otomatisasi, dan peningkatan performa bisnis',
                         },
                     ]}
                 />
@@ -160,42 +191,49 @@ export default function TalentMapping() {
                     fasilitas={[
                         {
                             id: '01',
-                            title: 'Sertifikat hasil STIFiN dan Talents Mapping (individual & team report)',
+                            title: 'Akses LMS korporasi berbasis akun (private & secure)',
                             isHighlighted: false,
                         },
                         {
                             id: '02',
-                            title: 'Konsultasi private individu (1 sesi via Zoom)',
+                            title: 'Modul dalam bentuk video interaktif, teks, kuis, dan tugas praktis',
                             isHighlighted: true,
                         },
                         {
                             id: '03',
-                            title: 'Presentasi hasil dan interpretasi profesional',
+                            title: 'Sertifikat digital resmi setelah kelulusan',
                             isHighlighted: true,
                         },
                         {
                             id: '04',
-                            title: 'Panduan pemanfaatan hasil (PDF + penjelasan personal)',
+                            title: 'Forum diskusi & leaderboard (opsional)',
+                            isHighlighted: false,
+                        },
+                    ]}
+                />
+
+                <FasilitasPeserta
+                    title="Fasilitas"
+                    subtitle="Perusahaan"
+                    fasilitas={[
+                        {
+                            id: '01',
+                            title: 'Dashboard admin memantau progres, nilai, dan aktivitas peserta',
                             isHighlighted: false,
                         },
                         {
-                            id: '05',
-                            title: 'Sesi coaching feedback (1-on-1 atau tim kecil)',
-                            isHighlighted: false,
-                        },
-                        {
-                            id: '06',
-                            title: 'Peta Potensi Tim (matrix visual rekomendasi)',
+                            id: '02',
+                            title: 'Kustomisasi tampilan, domain, dan konten LMS sesuai kebutuhan perusahaan',
                             isHighlighted: true,
                         },
                         {
-                            id: '07',
-                            title: 'Dashboard Data Rekap Hasil untuk HRD',
+                            id: '03',
+                            title: 'Integrasi konten internal seperti SOP, compliance, dan product knowledge',
                             isHighlighted: true,
                         },
                         {
-                            id: '08',
-                            title: 'Kustomisasi fokus (Leadership, Self Development, Marketing, Teaming, Recruitment)',
+                            id: '04',
+                            title: 'Laporan kompetensi serta pelatihan penggunaan sistem untuk tim HR atau L&D',
                             isHighlighted: false,
                         },
                     ]}
@@ -205,7 +243,7 @@ export default function TalentMapping() {
                     title="Bagi Organisasi"
                     subtitle="Benefit"
                     imageSrc="/img/general/benefit-talent.webp"
-                    imageAlt="Talent Mapping Program Benefits"
+                    imageAlt="E-Learning Program Benefits"
                     decorativeImageSrc="/img/general/clips2.png"
                     decorativeImageAlt="clips decoration"
                     benefits={[
@@ -220,7 +258,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Meningkatkan efektivitas tim dan produktivitas karyawan',
+                            description: 'Mendukung budaya kerja yang berorientasi pada continuous learning',
                         },
                         {
                             id: '2',
@@ -236,7 +274,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Menurunkan misplacement dan turnover karena mismatch potensi',
+                            description: 'Mengurangi biaya pelatihan onsite dan logistik',
                         },
                         {
                             id: '3',
@@ -252,7 +290,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Mempercepat pengambilan keputusan HR yang berbasis data dan objektif',
+                            description: 'Mendukung scalable learning untuk karyawan lintas cabang/daerah',
                         },
                         {
                             id: '4',
@@ -268,7 +306,7 @@ export default function TalentMapping() {
                                     />
                                 </svg>
                             ),
-                            description: 'Membangun talent pipeline untuk kepemimpinan masa depan',
+                            description: 'Siap diintegrasikan dengan sistem HRIS atau kebutuhan pelatihan jangka panjang',
                         },
                     ]}
                 />

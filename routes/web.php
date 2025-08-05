@@ -14,6 +14,10 @@ Route::get('/neuro', function () {
     return Inertia::render('Neuro');
 })->name('neuro');
 
+Route::get('/elearning', function () {
+    return Inertia::render('ELearning');
+})->name('elearning');
+
 Route::get('/talentmapping', function () {
     return Inertia::render('TalentMapping');
 })->name('talentmapping');

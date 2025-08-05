@@ -117,49 +117,17 @@ export default function Navbar({ className = '' }: NavbarProps) {
                                         </li>
                                         <li>
                                             <Link
-                                                href="/ecourse"
+                                                href="/elearning"
                                                 className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
-                                                    isActive('/ecourse') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
+                                                    isActive('/elearning') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
                                                 }`}
                                             >
-                                                E-Course
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href="/bootcamp"
-                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
-                                                    isActive('/bootcamp') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
-                                                }`}
-                                            >
-                                                Bootcamp
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                href="/eskul"
-                                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white ${
-                                                    isActive('/eskul') ? 'bg-headerbanner text-cardhitam' : 'text-cardhitam'
-                                                }`}
-                                            >
-                                                Ekskul
+                                                E-learning
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
                             )}
-                        </li>
-                        <li>
-                            <Link
-                                href="/galeri"
-                                className={`block rounded-sm px-3 py-2 capitalize hover:bg-tombol hover:text-white lg:border-0 lg:bg-transparent lg:hover:bg-transparent ${
-                                    isActive('/galeri')
-                                        ? 'bg-headerbanner text-white lg:bg-transparent lg:text-headerbanner lg:hover:text-headerbanner'
-                                        : 'text-white lg:bg-transparent lg:text-cardhitam lg:hover:text-[#FFB43F]'
-                                }`}
-                            >
-                                Gallery
-                            </Link>
                         </li>
                         <li>
                             <a

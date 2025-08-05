@@ -13,6 +13,40 @@ export default function Neuro() {
     return (
         <>
             <Head title="Neuro - Neuroscience Training Program">
+                <meta
+                    name="description"
+                    content="Program pelatihan neuroscience terdepan dari Excellent Consulting. Pelajari ilmu neurosains terapan untuk pengembangan SDM, leadership, dan peningkatan performa organisasi melalui pendekatan berbasis otak."
+                />
+                <meta
+                    name="keywords"
+                    content="neuroscience training, pelatihan neurosains, neuroleadership, brain-based learning, excellent consulting, pengembangan SDM neuroscience, pelatihan kepemimpinan berbasis otak, neuroscience Indonesia"
+                />
+                <meta name="robots" content="index, follow" />
+                <meta name="author" content="Excellent Consulting" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="canonical" href="http://excellentteam.id/neuro" />
+
+                {/* Open Graph Tags */}
+                <meta property="og:title" content="Neuro - Program Pelatihan Neuroscience | Excellent Consulting" />
+                <meta
+                    property="og:description"
+                    content="Program pelatihan neuroscience terdepan dari Excellent Consulting. Pelajari ilmu neurosains terapan untuk pengembangan SDM, leadership, dan peningkatan performa organisasi melalui pendekatan berbasis otak."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="http://excellentteam.id/neuro" />
+                <meta property="og:image" content="http://excellentteam.id/img/general/program-talent.jpg" />
+                <meta property="og:site_name" content="Excellent Consulting" />
+                <meta property="og:locale" content="id_ID" />
+
+                {/* Twitter Card */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Neuro - Program Pelatihan Neuroscience | Excellent Consulting" />
+                <meta
+                    name="twitter:description"
+                    content="Program pelatihan neuroscience terdepan untuk pengembangan SDM dan leadership berbasis ilmu neurosains terapan."
+                />
+                <meta name="twitter:image" content="http://excellentteam.id/img/general/program-talent.jpg" />
+
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
