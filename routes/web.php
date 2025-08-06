@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // API Routes (public access)
 Route::get('/api/testimoni', [TestimoniController::class, 'apiIndex'])->name('api.testimoni');
+Route::get('/api/portfolios', [PortfolioController::class, 'apiIndex'])->name('api.portfolios');
 
 Route::get('/nlp', function () {
     return Inertia::render('NLP');
@@ -40,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('testimoni', TestimoniController::class);
     Route::resource('users', UserController::class);
+    Route::resource('portfolios', PortfolioController::class);
 });
 
 require __DIR__ . '/settings.php';
