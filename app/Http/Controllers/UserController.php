@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest()->paginate(10);
-        
+
         // Format users for Inertia
         $users->getCollection()->transform(function ($user) {
             return [
@@ -34,8 +34,8 @@ class UserController extends Controller
             'total' => User::count(),
             'verified' => User::whereNotNull('email_verified_at')->count(),
             'this_month' => User::whereMonth('created_at', now()->month)
-                               ->whereYear('created_at', now()->year)
-                               ->count(),
+                ->whereYear('created_at', now()->year)
+                ->count(),
         ];
 
         return Inertia::render('Users/Index', [
@@ -59,7 +59,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -68,7 +68,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
+
         return redirect()->route('users.index')
             ->with('success', 'User berhasil ditambahkan!');
     }
@@ -79,7 +79,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        
+
         $userData = [
             'id' => $user->id,
             'name' => $user->name,
@@ -88,7 +88,7 @@ class UserController extends Controller
             'created_at' => $user->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $user->updated_at->format('Y-m-d H:i:s'),
         ];
-        
+
         return Inertia::render('Users/Show', [
             'user' => $userData
         ]);
@@ -100,7 +100,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        
+
         $userData = [
             'id' => $user->id,
             'name' => $user->name,
@@ -109,7 +109,7 @@ class UserController extends Controller
             'created_at' => $user->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $user->updated_at->format('Y-m-d H:i:s'),
         ];
-        
+
         return Inertia::render('Users/Edit', [
             'user' => $userData
         ]);
@@ -121,10 +121,10 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'required|string|lowercase|email|max:255|unique:users,email,' . $user->id,
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -132,13 +132,13 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
         ];
-        
+
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
-        
+
         $user->update($data);
-        
+
         return redirect()->route('users.index')
             ->with('success', 'User berhasil diperbarui!');
     }
