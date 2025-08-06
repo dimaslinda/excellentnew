@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::resource('testimoni', TestimoniController::class);
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__ . '/settings.php';

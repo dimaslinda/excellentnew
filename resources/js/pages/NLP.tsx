@@ -13,40 +13,28 @@ export default function NLP() {
     return (
         <>
             <Head title="NLP - Natural Language Processing">
-                <meta
-                    name="description"
-                    content="Program pelatihan NLP (Natural Language Processing) dari Excellent Consulting. Pelajari teknik komunikasi efektif, persuasi, dan pemrograman neuro-linguistik untuk meningkatkan kemampuan interpersonal dan leadership."
-                />
-                <meta
-                    name="keywords"
-                    content="NLP training, natural language processing, pelatihan NLP, neuro linguistic programming, komunikasi efektif, persuasi, excellent consulting, NLP Indonesia, pelatihan komunikasi"
-                />
+                <meta name="description" content="Program pelatihan NLP (Natural Language Processing) dari Excellent Consulting. Pelajari teknik komunikasi efektif, persuasi, dan pemrograman neuro-linguistik untuk meningkatkan kemampuan interpersonal dan leadership." />
+                <meta name="keywords" content="NLP training, natural language processing, pelatihan NLP, neuro linguistic programming, komunikasi efektif, persuasi, excellent consulting, NLP Indonesia, pelatihan komunikasi" />
                 <meta name="robots" content="index, follow" />
                 <meta name="author" content="Excellent Consulting" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <link rel="canonical" href="http://excellentteam.id/nlp" />
-
+                <link rel="canonical" href="http://localhost:8000/nlp" />
+                
                 {/* Open Graph Tags */}
                 <meta property="og:title" content="NLP - Natural Language Processing | Excellent Consulting" />
-                <meta
-                    property="og:description"
-                    content="Program pelatihan NLP (Natural Language Processing) dari Excellent Consulting. Pelajari teknik komunikasi efektif, persuasi, dan pemrograman neuro-linguistik untuk meningkatkan kemampuan interpersonal dan leadership."
-                />
+                <meta property="og:description" content="Program pelatihan NLP (Natural Language Processing) dari Excellent Consulting. Pelajari teknik komunikasi efektif, persuasi, dan pemrograman neuro-linguistik untuk meningkatkan kemampuan interpersonal dan leadership." />
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="http://excellentteam.id/nlp" />
-                <meta property="og:image" content="http://excellentteam.id/img/general/program-talent.jpg" />
+                <meta property="og:url" content="http://localhost:8000/nlp" />
+                <meta property="og:image" content="http://localhost:8000/img/general/program-talent.jpg" />
                 <meta property="og:site_name" content="Excellent Consulting" />
                 <meta property="og:locale" content="id_ID" />
-
+                
                 {/* Twitter Card */}
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="NLP - Natural Language Processing | Excellent Consulting" />
-                <meta
-                    name="twitter:description"
-                    content="Program pelatihan NLP untuk meningkatkan kemampuan komunikasi efektif dan pemrograman neuro-linguistik."
-                />
-                <meta name="twitter:image" content="http://excellentteam.id/img/general/program-talent.jpg" />
-
+                <meta name="twitter:description" content="Program pelatihan NLP untuk meningkatkan kemampuan komunikasi efektif dan pemrograman neuro-linguistik." />
+                <meta name="twitter:image" content="http://localhost:8000/img/general/program-talent.jpg" />
+                
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
