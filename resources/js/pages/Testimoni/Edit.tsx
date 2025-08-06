@@ -30,6 +30,7 @@ interface FlashMessages {
 
 interface PageProps {
     flash?: FlashMessages;
+    [key: string]: unknown;
 }
 
 interface TestimoniErrors {
@@ -71,6 +72,7 @@ export default function TestimoniEdit({ testimoni }: Props) {
         nama: testimoni.nama,
         lokasi: testimoni.lokasi,
         isi_testimoni: testimoni.isi_testimoni,
+        foto: null as File | null,
         _method: 'PUT'
     });
 

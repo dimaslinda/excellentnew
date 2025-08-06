@@ -41,6 +41,7 @@ interface FlashMessages {
 
 interface PageProps {
     flash?: FlashMessages;
+    [key: string]: unknown;
 }
 
 export default function TestimoniIndex({ testimonis }: Props) {

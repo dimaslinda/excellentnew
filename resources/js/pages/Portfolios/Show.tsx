@@ -8,7 +8,6 @@ import { ArrowLeft, Edit } from 'lucide-react';
 interface Portfolio {
     id: number;
     title: string;
-    description: string | null;
     thumbnail_image: string;
     image_1: string | null;
     image_2: string | null;
@@ -22,9 +21,9 @@ interface Props {
 
 export default function PortfolioShow({ portfolio }: Props) {
     const breadcrumbItems: BreadcrumbItem[] = [
-        { label: 'Dashboard', href: '/dashboard' },
-        { label: 'Portfolio', href: '/portfolios' },
-        { label: portfolio.title, href: `/portfolios/${portfolio.id}` },
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Portfolio', href: '/portfolios' },
+        { title: portfolio.title, href: `/portfolios/${portfolio.id}` },
     ];
 
     const formatDate = (dateString: string) => {
@@ -38,7 +37,7 @@ export default function PortfolioShow({ portfolio }: Props) {
     };
 
     return (
-        <AppLayout breadcrumbItems={breadcrumbItems}>
+        <AppLayout breadcrumbs={breadcrumbItems}>
             <Head title={`Portfolio - ${portfolio.title}`} />
 
             <div className="space-y-6 p-6">
@@ -141,13 +140,6 @@ export default function PortfolioShow({ portfolio }: Props) {
                                 <div className="space-y-4">
                                     <div>
                                         <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-gray-100">{portfolio.title}</h3>
-                                        {portfolio.description && (
-                                            <div className="rounded-lg border-l-4 border-purple-500 bg-gray-50 p-4 dark:bg-gray-700">
-                                                <p className="leading-relaxed whitespace-pre-wrap text-gray-700 dark:text-gray-300">
-                                                    {portfolio.description}
-                                                </p>
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
 

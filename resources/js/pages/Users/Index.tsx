@@ -25,11 +25,26 @@ interface User {
     created_at: string;
 }
 
+interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
+interface PaginationMeta {
+    current_page: number;
+    from: number;
+    last_page: number;
+    per_page: number;
+    to: number;
+    total: number;
+}
+
 interface Props {
     users: {
         data: User[];
-        links: any;
-        meta: any;
+        links: PaginationLink[];
+        meta: PaginationMeta;
     };
     stats: {
         total: number;
@@ -49,6 +64,7 @@ interface FlashMessages {
 
 interface PageProps {
     flash?: FlashMessages;
+    [key: string]: unknown;
 }
 
 export default function UsersIndex({ users, stats }: Props) {
@@ -115,15 +131,6 @@ export default function UsersIndex({ users, stats }: Props) {
     };
 
     const usersData = users.data || [];
-    const verifiedUsers = usersData.filter(user => user.email_verified_at !== null);
-    const thisMonthUsers = usersData.filter((user) => {
-        const userDate = new Date(user.created_at);
-        const currentDate = new Date();
-        return (
-            userDate.getMonth() === currentDate.getMonth() &&
-            userDate.getFullYear() === currentDate.getFullYear()
-        );
-    });
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

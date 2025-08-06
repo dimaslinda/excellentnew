@@ -9,7 +9,7 @@ import {
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
@@ -20,7 +20,6 @@ import toast from 'react-hot-toast';
 interface Portfolio {
     id: number;
     title: string;
-    description: string | null;
     thumbnail_image: string;
     image_1: string | null;
     image_2: string | null;
@@ -38,8 +37,8 @@ export default function PortfolioIndex({ portfolios }: Props) {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const breadcrumbItems: BreadcrumbItem[] = [
-        { label: 'Dashboard', href: '/dashboard' },
-        { label: 'Portfolio', href: '/portfolios' },
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Portfolio', href: '/portfolios' },
     ];
 
     const handleDelete = (portfolio: Portfolio) => {
@@ -73,7 +72,7 @@ export default function PortfolioIndex({ portfolios }: Props) {
     };
 
     return (
-        <AppLayout breadcrumbItems={breadcrumbItems}>
+        <AppLayout breadcrumbs={breadcrumbItems}>
             <Head title="Portfolio" />
 
             <div className="space-y-6 p-6">
@@ -141,9 +140,6 @@ export default function PortfolioIndex({ portfolios }: Props) {
                                     <CardTitle className="line-clamp-1 text-lg font-semibold transition-colors duration-200 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                                         {portfolio.title}
                                     </CardTitle>
-                                    {portfolio.description && (
-                                        <CardDescription className="line-clamp-2 text-sm leading-relaxed">{portfolio.description}</CardDescription>
-                                    )}
                                 </CardHeader>
                                 <CardContent className="pt-0">
                                     <div className="flex flex-wrap items-center gap-2">

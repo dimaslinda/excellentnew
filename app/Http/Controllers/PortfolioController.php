@@ -37,13 +37,12 @@ class PortfolioController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'thumbnail_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $data = $request->only(['title', 'description']);
+        $data = $request->only(['title']);
 
         // Handle thumbnail image upload
         if ($request->hasFile('thumbnail_image')) {
@@ -91,13 +90,12 @@ class PortfolioController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $data = $request->only(['title', 'description']);
+        $data = $request->only(['title']);
 
         // Handle thumbnail image upload
         if ($request->hasFile('thumbnail_image')) {
@@ -147,7 +145,6 @@ class PortfolioController extends Controller
                         $portfolio->image_1 ? '/storage/' . $portfolio->image_1 : null,
                         $portfolio->image_2 ? '/storage/' . $portfolio->image_2 : null,
                     ]),
-                    'description' => $portfolio->description,
                 ];
             });
 

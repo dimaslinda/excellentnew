@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, useForm } from '@inertiajs/react';
@@ -13,7 +12,6 @@ import toast from 'react-hot-toast';
 interface Portfolio {
     id: number;
     title: string;
-    description: string | null;
     thumbnail_image: string;
     image_1: string | null;
     image_2: string | null;
@@ -21,26 +19,16 @@ interface Portfolio {
     updated_at: string;
 }
 
-interface FormData {
-    title: string;
-    description: string;
-    thumbnail_image: File | null;
-    image_1: File | null;
-    image_2: File | null;
-    _method: string;
-}
-
 interface Props {
     portfolio: Portfolio;
 }
 
 export default function PortfolioEdit({ portfolio }: Props) {
-    const { data, setData, post, processing, errors } = useForm<FormData>({
+    const { data, setData, post, processing, errors } = useForm({
         title: portfolio.title,
-        description: portfolio.description || '',
-        thumbnail_image: null,
-        image_1: null,
-        image_2: null,
+        thumbnail_image: null as File | null,
+        image_1: null as File | null,
+        image_2: null as File | null,
         _method: 'PUT',
     });
 
@@ -49,10 +37,10 @@ export default function PortfolioEdit({ portfolio }: Props) {
     const [image2Preview, setImage2Preview] = useState<string | null>(null);
 
     const breadcrumbItems: BreadcrumbItem[] = [
-        { label: 'Dashboard', href: '/dashboard' },
-        { label: 'Portfolio', href: '/portfolios' },
-        { label: portfolio.title, href: `/portfolios/${portfolio.id}` },
-        { label: 'Edit', href: `/portfolios/${portfolio.id}/edit` },
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Portfolio', href: '/portfolios' },
+        { title: portfolio.title, href: `/portfolios/${portfolio.id}` },
+        { title: 'Edit', href: `/portfolios/${portfolio.id}/edit` },
     ];
 
     const handleFileChange = (field: 'thumbnail_image' | 'image_1' | 'image_2', file: File | null) => {
@@ -101,59 +89,77 @@ export default function PortfolioEdit({ portfolio }: Props) {
         currentImage: string | null;
         required?: boolean;
     }) => (
-        <div className="space-y-3">
+        <div className="space-y-4">
             <Label htmlFor={field} className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 {label} {required && <span className="text-red-500">*</span>}
             </Label>
-            <div className="space-y-4">
-                <div className="relative">
-                    <Input
-                        id={field}
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                            const file = e.target.files?.[0] || null;
-                            handleFileChange(field, file);
-                        }}
-                        className={`border-2 transition-all duration-200 focus:ring-2 focus:ring-blue-500/20 ${
-                            errors[field]
-                                ? 'border-red-500 bg-red-50 focus:border-red-500 dark:bg-red-950/20'
-                                : 'border-gray-200 bg-white focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800'
-                        }`}
-                    />
-                    {preview && (
-                        <div className="absolute top-1/2 right-3 -translate-y-1/2 transform">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700 dark:bg-green-900 dark:text-green-300">
-                                ✓ Terpilih
-                            </span>
+            
+            {/* Upload Area */}
+            <div className="relative">
+                <input
+                    id={field}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                        const file = e.target.files?.[0] || null;
+                        handleFileChange(field, file);
+                    }}
+                    className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+                />
+                <div className={`group relative overflow-hidden rounded-xl border-2 border-dashed transition-all duration-300 ${
+                    errors[field]
+                        ? 'border-red-400 bg-red-50/50 dark:border-red-500 dark:bg-red-950/20'
+                        : 'border-gray-300 bg-gradient-to-br from-blue-50/50 to-purple-50/50 hover:border-blue-400 hover:from-blue-100/70 hover:to-purple-100/70 dark:border-gray-600 dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:border-blue-500'
+                }`}>
+                    <div className="flex min-h-[120px] flex-col items-center justify-center p-6 text-center">
+                        <div className="mb-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-3 shadow-lg">
+                            <Upload className="h-6 w-6 text-white" />
                         </div>
-                    )}
+                        <p className="mb-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            Klik atau seret gambar ke sini
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                            Format: JPG, PNG, GIF • Maksimal 2MB
+                        </p>
+                        {preview && (
+                            <div className="mt-2">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900 dark:text-green-300">
+                                    ✓ File terpilih
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 </div>
+            </div>
 
+            {/* Preview Section */}
+            <div className="space-y-4">
                 {/* Show new preview if file is selected */}
                 {preview && (
                     <div className="group relative">
-                        <div className="mb-3 flex items-center gap-2">
-                            <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                            <p className="text-sm font-semibold text-green-600 dark:text-green-400">Gambar Baru</p>
+                        <div className="mb-3 flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                                <p className="text-sm font-semibold text-green-600 dark:text-green-400">Gambar Baru</p>
+                            </div>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="h-8 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/20"
+                                onClick={() => handleFileChange(field, null)}
+                            >
+                                <Trash2 className="h-3 w-3 mr-1" />
+                                Hapus
+                            </Button>
                         </div>
-                        <div className="relative overflow-hidden rounded-lg shadow-md">
+                        <div className="relative overflow-hidden rounded-xl shadow-lg">
                             <img
                                 src={preview}
                                 alt="Preview Baru"
-                                className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                            <Button
-                                type="button"
-                                variant="destructive"
-                                size="sm"
-                                className="absolute top-3 right-3 shadow-lg transition-all duration-200 hover:shadow-xl"
-                                onClick={() => handleFileChange(field, null)}
-                            >
-                                <Trash2 className="h-4 w-4" />
-                                Hapus Gambar
-                            </Button>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         </div>
                     </div>
                 )}
@@ -165,39 +171,37 @@ export default function PortfolioEdit({ portfolio }: Props) {
                             <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                             <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">Gambar Saat Ini</p>
                         </div>
-                        <div className="relative overflow-hidden rounded-lg shadow-md">
+                        <div className="relative overflow-hidden rounded-xl shadow-lg">
                             <img
                                 src={`/storage/${currentImage}`}
                                 alt="Gambar Saat Ini"
-                                className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                            <div className="absolute bottom-3 left-3">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                                    Gambar aktif
+                                </span>
+                            </div>
                         </div>
                     </div>
                 )}
-
-                {/* Show upload placeholder if no preview and no current image */}
-                {!preview && !currentImage && (
-                    <div className="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-8 text-center transition-colors duration-200 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        <Upload className="mx-auto mb-3 h-12 w-12 text-gray-400 dark:text-gray-500" />
-                        <p className="mb-1 text-sm font-medium text-gray-600 dark:text-gray-400">Pilih gambar untuk {label.toLowerCase()}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500">Format: JPG, PNG, GIF (Max: 2MB)</p>
-                    </div>
-                )}
             </div>
+
+            {/* Error Message */}
             {errors[field] && (
-                <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 p-2 text-sm text-red-600 dark:border-red-800 dark:bg-red-950/20">
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-950/20">
+                    <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    {errors[field]}
+                    <span>{errors[field]}</span>
                 </div>
             )}
         </div>
     );
 
     return (
-        <AppLayout breadcrumbItems={breadcrumbItems}>
+        <AppLayout breadcrumbs={breadcrumbItems}>
             <Head title={`Edit Portfolio - ${portfolio.title}`} />
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-6">
@@ -220,7 +224,7 @@ export default function PortfolioEdit({ portfolio }: Props) {
                     </div>
                 </div>
 
-                <Card className="overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border bg-white dark:bg-gray-800">
+                <Card className="overflow-hidden rounded-xl border border-sidebar-border/70 bg-white dark:border-sidebar-border dark:bg-gray-800">
                     <CardHeader className="border-b border-sidebar-border/70 bg-gradient-to-r from-blue-50 to-purple-50 dark:border-sidebar-border dark:from-blue-900/50 dark:to-purple-900/50">
                         <CardTitle className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
                             <div className="h-2 w-2 rounded-full bg-blue-500"></div>
@@ -257,37 +261,6 @@ export default function PortfolioEdit({ portfolio }: Props) {
                                             />
                                         </svg>
                                         {errors.title}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="space-y-3">
-                                <Label htmlFor="description" className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                                    Deskripsi
-                                </Label>
-                                <Textarea
-                                    id="description"
-                                    value={data.description}
-                                    onChange={(e) => setData('description', e.target.value)}
-                                    placeholder="Masukkan deskripsi portfolio (opsional)"
-                                    rows={4}
-                                    className={`resize-none border-2 transition-all duration-200 focus:ring-2 focus:ring-blue-500/20 ${
-                                        errors.description
-                                            ? 'border-red-500 bg-red-50 focus:border-red-500 dark:bg-red-950/20'
-                                            : 'border-gray-200 bg-white focus:border-blue-500 dark:border-gray-700 dark:bg-gray-800'
-                                    }`}
-                                />
-                                {errors.description && (
-                                    <div className="flex items-center gap-2 rounded-md border border-red-200 bg-red-50 p-2 text-sm text-red-600 dark:border-red-800 dark:bg-red-950/20">
-                                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        {errors.description}
                                     </div>
                                 )}
                             </div>

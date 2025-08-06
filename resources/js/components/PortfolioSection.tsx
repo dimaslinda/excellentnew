@@ -5,7 +5,12 @@ interface PortfolioItem {
     id: number;
     title: string;
     images: string[];
-    description?: string;
+}
+
+interface ApiPortfolioItem {
+    id: number;
+    title: string;
+    images: string[];
 }
 
 interface PortfolioSectionProps {
@@ -36,11 +41,10 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({
             const data = await response.json();
 
             // Transform API data to match component interface
-            const transformedData = data.map((item: any) => ({
+            const transformedData = data.map((item: ApiPortfolioItem) => ({
                 id: item.id,
                 title: item.title,
                 images: item.images.length > 0 ? item.images : ['/img/general/produk1.webp'],
-                description: item.description,
             }));
 
             setPortfolioItems(transformedData);

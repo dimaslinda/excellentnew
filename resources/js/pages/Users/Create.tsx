@@ -18,13 +18,7 @@ interface FlashMessages {
 
 interface PageProps {
     flash?: FlashMessages;
-}
-
-interface UserErrors {
-    name?: string;
-    email?: string;
-    password?: string;
-    password_confirmation?: string;
+    [key: string]: unknown;
 }
 
 const breadcrumbs: BreadcrumbItem[] = [

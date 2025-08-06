@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, useForm } from '@inertiajs/react';
@@ -10,21 +9,12 @@ import { ArrowLeft, Trash2, Upload } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
-interface FormData {
-    title: string;
-    description: string;
-    thumbnail_image: File | null;
-    image_1: File | null;
-    image_2: File | null;
-}
-
 export default function PortfolioCreate() {
-    const { data, setData, post, processing, errors } = useForm<FormData>({
+    const { data, setData, post, processing, errors } = useForm({
         title: '',
-        description: '',
-        thumbnail_image: null,
-        image_1: null,
-        image_2: null,
+        thumbnail_image: null as File | null,
+        image_1: null as File | null,
+        image_2: null as File | null,
     });
 
     const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
@@ -32,9 +22,9 @@ export default function PortfolioCreate() {
     const [image2Preview, setImage2Preview] = useState<string | null>(null);
 
     const breadcrumbItems: BreadcrumbItem[] = [
-        { label: 'Dashboard', href: '/dashboard' },
-        { label: 'Portfolio', href: '/portfolios' },
-        { label: 'Tambah Portfolio', href: '/portfolios/create' },
+        { title: 'Dashboard', href: '/dashboard' },
+        { title: 'Portfolio', href: '/portfolios' },
+        { title: 'Tambah Portfolio', href: '/portfolios/create' },
     ];
 
     const handleFileChange = (field: 'thumbnail_image' | 'image_1' | 'image_2', file: File | null) => {
@@ -81,67 +71,93 @@ export default function PortfolioCreate() {
         preview: string | null;
         required?: boolean;
     }) => (
-        <div className="space-y-3">
-            <Label htmlFor={field} className="text-sm font-medium">
+        <div className="space-y-4">
+            <Label htmlFor={field} className="text-sm font-semibold text-gray-700 dark:text-gray-300">
                 {label} {required && <span className="text-red-500">*</span>}
             </Label>
-            <div className="space-y-4">
-                {preview ? (
-                    <div className="group relative">
+            
+            {/* Upload Area */}
+            <div className="relative">
+                <input
+                    id={field}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                        const file = e.target.files?.[0] || null;
+                        handleFileChange(field, file);
+                    }}
+                    className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
+                />
+                <div className={`group relative overflow-hidden rounded-xl border-2 border-dashed transition-all duration-300 ${
+                    errors[field]
+                        ? 'border-red-400 bg-red-50/50 dark:border-red-500 dark:bg-red-950/20'
+                        : 'border-gray-300 bg-gradient-to-br from-blue-50/50 to-purple-50/50 hover:border-blue-400 hover:from-blue-100/70 hover:to-purple-100/70 dark:border-gray-600 dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:border-blue-500'
+                }`}>
+                    <div className="flex min-h-[120px] flex-col items-center justify-center p-6 text-center">
+                        <div className="mb-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-3 shadow-lg">
+                            <Upload className="h-6 w-6 text-white" />
+                        </div>
+                        <p className="mb-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            Klik atau seret gambar ke sini
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                            Format: JPG, PNG, GIF • Maksimal 2MB
+                        </p>
+                        {preview && (
+                            <div className="mt-2">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900 dark:text-green-300">
+                                    ✓ File terpilih
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Preview Section */}
+            {preview && (
+                <div className="group relative">
+                    <div className="mb-3 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                            <p className="text-sm font-semibold text-green-600 dark:text-green-400">Preview Gambar</p>
+                        </div>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className="h-8 border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/20"
+                            onClick={() => handleFileChange(field, null)}
+                        >
+                            <Trash2 className="h-3 w-3 mr-1" />
+                            Hapus
+                        </Button>
+                    </div>
+                    <div className="relative overflow-hidden rounded-xl shadow-lg">
                         <img
                             src={preview}
                             alt="Preview"
-                            className="h-56 w-full rounded-lg border-2 border-gray-200 object-cover shadow-sm dark:border-gray-600"
+                            className="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                            <Button type="button" variant="destructive" size="sm" className="shadow-lg" onClick={() => handleFileChange(field, null)}>
-                                <Trash2 className="mr-2 h-4 w-4" />
-                                Hapus Gambar
-                            </Button>
-                        </div>
-                        <div className="absolute top-3 left-3 rounded-full bg-green-500 px-2 py-1 text-xs font-medium text-white">✓ Terpilih</div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     </div>
-                ) : (
-                    <div className="relative">
-                        <input
-                            id={field}
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                                const file = e.target.files?.[0] || null;
-                                handleFileChange(field, file);
-                            }}
-                            className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
-                        />
-                        <div
-                            className={`rounded-lg border-2 border-dashed p-8 text-center transition-all duration-200 hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 ${
-                                errors[field] ? 'border-red-300 bg-red-50/50 dark:bg-red-950/20' : 'border-gray-300 dark:border-gray-600'
-                            }`}
-                        >
-                            <div className="space-y-3">
-                                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800">
-                                    <Upload className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-                                </div>
-                                <div className="space-y-1">
-                                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Klik untuk memilih {label.toLowerCase()}</p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, JPEG hingga 10MB</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
+                </div>
+            )}
+
+            {/* Error Message */}
             {errors[field] && (
-                <p className="flex items-center gap-1 text-sm text-red-600">
-                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs dark:bg-red-900">!</span>
-                    {errors[field]}
-                </p>
+                <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-950/20">
+                    <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{errors[field]}</span>
+                </div>
             )}
         </div>
     );
 
     return (
-        <AppLayout breadcrumbItems={breadcrumbItems}>
+        <AppLayout breadcrumbs={breadcrumbItems}>
             <Head title="Tambah Portfolio" />
 
             <div className="space-y-6 p-6">
@@ -195,32 +211,6 @@ export default function PortfolioCreate() {
                                             !
                                         </span>
                                         {errors.title}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div className="space-y-3">
-                                <Label htmlFor="description" className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    Deskripsi
-                                </Label>
-                                <Textarea
-                                    id="description"
-                                    value={data.description}
-                                    onChange={(e) => setData('description', e.target.value)}
-                                    placeholder="Jelaskan portfolio Anda dengan detail yang menarik dan informatif..."
-                                    rows={5}
-                                    className={`resize-none text-base transition-all duration-200 ${
-                                        errors.description
-                                            ? 'border-red-300 bg-red-50/50 focus:border-red-400 dark:bg-red-950/20'
-                                            : 'border-gray-200 focus:border-blue-400 focus:ring-blue-400/20 dark:border-gray-700'
-                                    }`}
-                                />
-                                {errors.description && (
-                                    <p className="flex items-center gap-1 text-sm text-red-600">
-                                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs dark:bg-red-900">
-                                            !
-                                        </span>
-                                        {errors.description}
                                     </p>
                                 )}
                             </div>

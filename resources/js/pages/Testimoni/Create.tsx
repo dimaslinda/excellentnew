@@ -18,6 +18,7 @@ interface FlashMessages {
 
 interface PageProps {
     flash?: FlashMessages;
+    [key: string]: unknown;
 }
 
 interface TestimoniErrors {
@@ -57,6 +58,7 @@ export default function TestimoniCreate() {
         nama: '',
         lokasi: '',
         isi_testimoni: '',
+        foto: null as File | null,
     });
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
